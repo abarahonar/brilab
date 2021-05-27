@@ -1,0 +1,6 @@
+[submodule "brilab_back"]
+	path = brilab_back
+	url = git@github.com:abarahonar/brilab_back.git
+[submodule "brilab_front"]
+	path = brilab_front
+	url = git@github.com:abarahonar/brilab_front.git
