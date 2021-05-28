@@ -1,7 +1,7 @@
 # Image
 Elasticsearch version: `7.12.1`
 
-A custom docker image that installs the ingest-attachment plugin is needed. To build it `docker build -t elastic_pdf .elasticsearch/`
+A custom docker image that installs the ingest-attachment plugin is needed. To build it `docker build -t elastic_pdf elasticsearch/`
 
 # Container
 To run elasticserach persistently
