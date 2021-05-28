@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# TODO subir los archivos a un bucket con el mismo nombre que tienen aca
+# TODO testear si el upload a un bucket efectivamente funciona
 
 if [[ $# -eq 0 ]]; then
     echo "Usage: ${0} url folder [folder...]"
@@ -27,8 +27,16 @@ for dir in "${@}"; do
         done
         echo "${i}: ${file} -> ${name}"
         touch "${unique_name}"
-        (echo -n "{\"filename\":\"${name}\",\"data\":\"" && base64 "${file}"; echo "\"}") \
-            | curl -H "Content-Type:application/json" -d @- "${url}/files/_doc?pipeline=attachment" >/dev/null 2>&1
+        (echo -n "{\"filename\":\"${name}\",\"data\":\"" && \
+            base64 "${file}"; \
+            echo "\"}") | \
+            curl -H "Content-Type:application/json" -d @- \
+            "${url}/files/_doc?pipeline=attachment" >/dev/null 2>&1
+        # https://cloud.google.com/storage/docs/uploading-objects#rest-upload-objects
+        curl -X POST --data-binary @"${file}" \ #>/dev/null 2>&1 \
+            -H "Authorization: Bearer ${OAUTH2_TOKEN}" \
+            -H "Content-Type: application/pdf" \
+            "https://storage.googleapis.com/upload/storage/v1/b/${BUCKET_NAME}/o?uploadType=media&name=${name}"
         i=$((i + 1))
     done
 done

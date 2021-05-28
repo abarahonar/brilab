@@ -1,0 +1,17 @@
+services:
+    reverse_proxy:
+        image: nginx:alpine
+        ports:
+            - "80:80"
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf:ro
+            - nginx_data:/var/log/nginx
+    elasticsearch:
+        build: elasticsearch
+        ports:
+            - "9200:9200"
+            - "9300:9300"
+        environment:
+            - discovery.type=single-node
+        volumes:
+            - elastic_data:/usr/share/elasticsearch/data
