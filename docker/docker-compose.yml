@@ -5,7 +5,6 @@ services:
             - "80:80"
         volumes:
             - ./nginx.conf:/etc/nginx/nginx.conf:ro
-            - nginx_data:/var/log/nginx
     elasticsearch:
         build: elasticsearch
         ports:
@@ -13,5 +12,3 @@ services:
             - "9300:9300"
         environment:
             - discovery.type=single-node
-        volumes:
-            - elastic_data:/usr/share/elasticsearch/data
