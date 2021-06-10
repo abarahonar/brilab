@@ -4,7 +4,8 @@ CREATE TABLE IF NOT EXISTS conflictos (
     name VARCHAR(255) NOT NULL,
     region VARCHAR(255) NOT NULL,
     sector VARCHAR(255) NOT NULL,
-    year INTEGER
+    year INTEGER NOT NULL,
+    content TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS regiones (
